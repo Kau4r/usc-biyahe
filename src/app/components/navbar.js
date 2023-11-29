@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import Image from 'next/image'
 
 import { useEffect, useState } from 'react'
 
@@ -19,8 +20,28 @@ export default function Dash() {
 
     return (
         <nav className={styles.navbar}>
+            <div className={styles.logocont}>
+                <Image src='/logo.png' width={100} height={100} className={styles.logo}/>
+            </div>
+            <div className={styles.txtbox}>
+                <input type='text' placeholder='From'>
+                </input>
+            </div>
+            <div className={styles.txtbox}>
+                <input type='text' placeholder='To'>
+                </input>
+            </div>
             <div className={chkPage('/')}>
-                <Link href='/'><FontAwesomeIcon icon={faHouse} /></Link>
+                <Link href='/'>Routes</Link>
+            </div>
+            {/* <div className={chkPage('/ceres')}>
+                <Link href='/ceres'>Ceres</Link>
+            </div> */}
+            <div className={chkPage('/about')}>
+                <Link href='/about'>About</Link>
+            </div>
+            <div className={chkPage('/contact')}>
+                <Link href='/contact'>Contact</Link>
             </div>
         </nav>
     )

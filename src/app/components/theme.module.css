@@ -1,0 +1,31 @@
+.theme {
+    position: absolute;
+
+    bottom: 10px;
+    right: 10px;
+    background: none;
+    
+    z-index: 3;
+}
+
+.theme * {
+    font-size: 2em;
+
+    background: var(--secondary);
+
+    padding: .3em;
+
+    aspect-ratio: 1;
+    
+    border-radius: 1em;
+
+    transition: color ease 300ms;
+
+}
+
+.theme:hover *,
+.theme *:hover {
+    cursor: pointer;
+    
+    color: var(--accent);
+}
