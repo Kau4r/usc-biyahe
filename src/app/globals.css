@@ -1,9 +1,9 @@
 :root {
     --text: #3d3d3d;
     --background: #dbe7f0;
-    --primary: #b52a17;
+    --primary: #ffd900;
     --secondary: #72b7cb;
-    --accent: #ffd900;
+    --accent: #b52a17;
 }
 
 [data-theme='dark'] {
@@ -27,4 +27,8 @@
     color: var(--text);
 
     transition: background-color ease-in 200ms, color ease 400ms;
+}
+
+body {
+    overflow: auto;
 }

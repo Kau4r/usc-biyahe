@@ -34,9 +34,6 @@ export default function Dash() {
             <div className={chkPage('/')}>
                 <Link href='/'>Routes</Link>
             </div>
-            {/* <div className={chkPage('/ceres')}>
-                <Link href='/ceres'>Ceres</Link>
-            </div> */}
             <div className={chkPage('/about')}>
                 <Link href='/about'>About</Link>
             </div>

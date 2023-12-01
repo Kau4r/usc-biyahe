@@ -1,0 +1,108 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about_cont {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    
+    justify-content: space-evenly;
+    position: absolute;
+
+    width: 60%;
+
+    padding-top: 5em;
+
+    background-color: var(--text);
+
+    height: max-content;
+
+    padding-bottom: 1.5m;
+}
+
+.about_col {
+    display: flex;
+    
+    flex-direction: column;
+
+    background: none;
+}
+
+.about_col > div {
+    margin: 1em 1.5em 1em 1.5em;
+}
+
+.about_box_info,
+.about_box {
+    box-shadow: 0px 0px 14px -4px var(--background);
+}
+
+.about_box_info {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    background: var(--secondary);
+    width: 70%;
+
+    padding: 2em;
+
+    border-radius: 1em;
+    height: 10em;
+}
+
+.about_box {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-end ;
+
+    background: var(--background);
+    width: 70%;
+
+    padding: 2em;
+
+    border-radius: 1em;
+    height: 23em;
+}
+
+.photo {
+    aspect-ratio: 1;
+
+    width: 100%;
+
+    margin-bottom: 1em;
+
+    border-radius: 1em;
+
+    box-shadow: 0px 0px 14px -8px var(--text);
+}
+
+.main_txt {
+    background: none;
+
+    font-size: 4em;
+}
+
+.name_txt {
+    background: none;
+
+    font-size: 1.5em;
+}
+
+.second_txt {
+    background: none;
+
+    font-style: italic;
+
+    font-weight: 400;
+
+    font-size: 0.8em;
+
+    color: var(--accent);
+}

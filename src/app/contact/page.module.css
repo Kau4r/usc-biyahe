@@ -1,0 +1,134 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    
+    position: absolute;
+
+    width: 80%;
+
+    background-color: var(--text);
+
+    height: 100%;
+
+    overflow-y: auto;
+}
+
+.contact_us {
+
+    margin-top: 5em;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    background: var(--secondary);
+    width: 25em;
+
+    padding: 2em;
+
+    border-radius: 1em;
+    height: 3em;
+}
+
+.main_txt {
+    background: none;
+
+    font-size: 4em;
+}
+
+.name_txt {
+    background: none;
+
+    font-size: 1.5em;
+}
+
+.second_txt {
+    background: none;
+
+    font-style: italic;
+
+    font-weight: 400;
+
+    font-size: 0.8em;
+
+    color: var(--accent);
+}
+
+.contact_form {
+    margin-top: 3em;
+
+    display: flex;
+    flex-direction: column;
+
+
+    width: 80%;
+
+    min-height: 5em;
+    height: max-content;
+
+    border-radius: 1em;
+
+
+}
+
+.contact_form > * {
+    margin: 1em 1em 0em 1em;
+}
+
+.contact_form > *:last-child {
+    margin: 1em 1em 2em 1em;
+}
+
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.input {
+    background: var(--text);
+    padding: .3em .5em .3em .5em;
+    color: var(--background);
+    width: 40%;
+    border-radius: 5px;
+}
+
+.input:placeholder {
+    color: var(--background);
+}
+
+.txtarea {
+    background: var(--text);
+    padding: .3em .5em .3em .5em;
+    color: var(--background);
+    width: 90%;
+    border-radius: 5px;
+
+    height: 4em;
+}
+
+.button {
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: .3em .5em .3em .5em;
+    background: var(--accent);
+    color: var(--background);
+    border-radius: 15px;
+}
+
+.button:hover {
+    cursor: pointer;
+
+    background: var(--secondary);
+    color: var(--text);
+}
