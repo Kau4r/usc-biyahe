@@ -9,7 +9,7 @@ export const metadata = {
   description: 'biyahe ta bai!',
 }
 
-export default function Home() {
+export default function About() {
   return (
     <main className={styles.main}>
       <Nav/>
