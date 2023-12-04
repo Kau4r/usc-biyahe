@@ -1,9 +1,5 @@
 import mail from 'nodemailer'
 
-const
-    email = 'uscbiyahe@gmail.com',
-    password = 'uscbiyahePa55'
-
 const transporter = mail.createTransport({
     host: 'smtp.google.com',
     port: 465,
