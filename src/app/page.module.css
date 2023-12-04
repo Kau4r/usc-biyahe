@@ -1,4 +1,4 @@
-.temp {
+.main {
     position: fixed;
 
     width: 100vw;
@@ -12,10 +12,4 @@
     background-color: var(--text);
     color: var(--background);
     z-index: 1;
-}
-
-.map {
-    position: fixed;
-    width: 100%;
-    height: 100%;
 }

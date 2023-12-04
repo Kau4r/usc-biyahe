@@ -2,15 +2,12 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-
     width: 100%;
     height: 2.5em;
-
     font-size: 1.5em;
-
-    box-shadow: 0px 5px 9px -1px var(--background);
-    
+    box-shadow: 0px 5px 9px -1px #3d3d3d;
     z-index: 3;
+    background-color: var(--background);
 }
 
 .navbar > div {
@@ -71,3 +68,29 @@
 .Link:hover * {
     color: var(--primary);
 }
+
+/* Non-responsive styles */
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    /* Adjustments for smaller screens or mobile devices */
+  
+    .navbar {
+      height: auto; /* Adjust the height as needed */
+      flex-direction: column; /* Stack items vertically */
+    }
+  
+    .navbar > div {
+      margin: 0.5em 0; /* Increase margin for better spacing */
+    }
+  
+    .txtbox input {
+      width: 100%; /* Make text input full width */
+    }
+  
+    .current,
+    .Link {
+      padding: 0.5em 1em !important; /* Adjust padding for smaller touch targets */
+    }
+  }
+  
