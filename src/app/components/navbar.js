@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import { Autocomplete } from "@react-google-maps/api";
 
-export default function Dash({setFrom,setTo}) {
+export default function Dash({ setFrom, setTo }) {
   const pathname = usePathname();
 
   const chkPage = (href) => {
@@ -26,14 +26,19 @@ export default function Dash({setFrom,setTo}) {
           className={styles.logo}
         />
       </div>
-      <div className={chkPage("/")}>
-        <Link href="/">Routes</Link>
-      </div>
-      <div className={chkPage("/about")}>
-        <Link href="/about">About</Link>
-      </div>
-      <div className={chkPage("/contact")}>
-        <Link href="/contact">Contact</Link>
+      <div className={styles.links}>
+        <div className={chkPage("/")}>
+          <Link href="/">Routes</Link>
+        </div>
+        <div className={chkPage("/about")}>
+          <Link href="/about">About</Link>
+        </div>
+        <div className={chkPage("/contact")}>
+          <Link href="/contact">Contact</Link>
+        </div>
+        <div className={chkPage("/signin")}>
+          <Link href="/signin">Sign In</Link>
+        </div>
       </div>
     </nav>
   );
