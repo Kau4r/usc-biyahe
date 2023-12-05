@@ -1,96 +1,99 @@
 .navbar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    height: 2.5em;
-    font-size: 1.5em;
-    box-shadow: 0px 5px 9px -1px #3d3d3d;
-    z-index: 3;
-    background-color: var(--background);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between; /* Add this line */
+  height: 2.5em;
+  font-size: 1.5em;
+  box-shadow: 0px 5px 9px -1px #3d3d3d;
+  z-index: 3;
+  background-color: var(--background);
 }
 
 .navbar > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center; /* Add this line */
+  align-self: center;
+  margin: 0 0.1em 0 0.1em; /* Reduced margin */
+}
 
-    margin: 0 .25em 0 .25em;
+.links {
+  padding-right: 1em;
 }
 
 .logo {
-
-    width: 1.5em;
-    height: 1.5em;
-
-    border-radius: 1em;
+  width: 1.5em;
+  height: 1.5em;
+  margin-left: 1em;
+  border-radius: 1em;
 }
 
 .txtbox input {
-    padding: .5em;
+  padding: 0.5em;
 
-    border: none;
+  border: none;
 
-    border-radius: 1em;
+  border-radius: 1em;
 
-    background-color: var(--text);
-    color: var(--background);
+  background-color: var(--text);
+  color: var(--background);
 }
 
 .txtbox input::placeholder {
-    color: var(--background);
+  color: var(--background);
 }
-
 
 .current,
 .Link {
-    padding: .1em 1em .1em 1em !important;
+  padding: 0.1em 1em 0.1em 1em !important;
 }
 
 .current,
 .current * {
-    background: var(--secondary);
-    border-radius: 1em;
+  background: var(--secondary);
+  border-radius: 1em;
 
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .Link,
 .Link * {
-    cursor: pointer;
-    background: none;
+  cursor: pointer;
+  background: none;
 
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .Link:hover,
 .Link:hover * {
-    color: var(--primary);
+  color: var(--primary);
 }
 
 /* Non-responsive styles */
 
 /* Responsive styles */
 @media (max-width: 768px) {
-    /* Adjustments for smaller screens or mobile devices */
-  
-    .navbar {
-      height: auto; /* Adjust the height as needed */
-      flex-direction: column; /* Stack items vertically */
-    }
-  
-    .navbar > div {
-      margin: 0.5em 0; /* Increase margin for better spacing */
-    }
-  
-    .txtbox input {
-      width: 100%; /* Make text input full width */
-    }
-  
-    .current,
-    .Link {
-      padding: 0.5em 1em !important; /* Adjust padding for smaller touch targets */
-    }
+  /* Adjustments for smaller screens or mobile devices */
+
+  .navbar {
+    height: auto; /* Adjust the height as needed */
+    flex-direction: column; /* Stack items vertically */
   }
-  
+
+  .navbar > div {
+    flex-direction: column; /* Stack items vertically */
+    margin: 0.5em 0; /* Increase margin for better spacing */
+  }
+
+  .txtbox input {
+    width: 100%; /* Make text input full width */
+  }
+
+  .current,
+  .Link {
+    padding: 0.5em 1em !important; /* Adjust padding for smaller touch targets */
+  }
+}
