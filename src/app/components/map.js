@@ -1,16 +1,33 @@
-import {
-  useJsApiLoader,
-  GoogleMap,
-  Marker,
-  Autocomplete,
-  DirectionsRenderer,
-} from "@react-google-maps/api";
-import { useRef, useState } from "react";
-import styles from "@/app/map.module.css";
+'use client'
 
-const center = { lat: 10.332615673533242, lng: 123.90974285444454 };
+import {  useJsApiLoader, GoogleMap, Marker, Autocomplete, DirectionsRenderer, } from "@react-google-maps/api";
+import { useRef, useState }  from "react";
+import styles from "@/app/components/map.module.css";
+
+let center = { lat: 10.332615673533242, lng: 123.90974285444454 };
 
 export default function App() {
+
+  // For getting location
+  const [ location, setLocation ] = useState(null)
+
+  const getLoc = async () => {
+    try {
+      const position = await new Promise((resolve, reject) => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(resolve, reject)
+        } else {
+          reject( new Error('Not Supported'))
+        }
+      })
+      setLocation({ lat: position.coords.latitude, lng: position.coords.longitude })
+      console.log(latitude)
+
+    } catch (error) {
+      console.error('Error getting location')
+    }
+  }
+  
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyBF8tm3ds5kJQ7l7VbQcqWQQZkUy1AFgKM",
     libraries: ["places"],
