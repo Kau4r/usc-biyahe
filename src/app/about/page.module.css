@@ -4,105 +4,106 @@
     align-items: center;
 }
 
-.about_cont {
+.headtxt {
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.subtxt {
+    font-weight: 600;
+    font-size: 1.4em;
+    width: 85vw;
+}
+
+.secondtxt {
+    margin-top: .4em;
+    font-weight: bold;
+    font-size: 1.4em;
+}
+
+.normtxt {
+    font-size: 1em;
+    font-weight: 400;
+}
+
+.high {
+    color: var(--primary);
+}
+
+.high2 {
+    color: var(--accent);
+}
+
+.high2:hover {
+    color: var(--primary);
+}
+
+.about_page {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+
+    overflow-y: auto;
+
+    background-color: var(--background);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about_1 {
+    width: 100%;
+    height: 28vh;
+    margin-top: 5em;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about_2 {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.team_cont {
+    width: 100%;
+    margin-top: 1em;
+    
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 
-    
     justify-content: space-evenly;
-    position: absolute;
 
-    width: 60%;
 
-    padding-top: 5em;
-
-    background-color: var(--text);
-
-    height: max-content;
-
-    padding-bottom: 1.5m;
 }
 
-.about_col {
-    display: flex;
-    
-    flex-direction: column;
-
-    background: none;
-}
-
-.about_col > div {
-    margin: 1em 1.5em 1em 1.5em;
-}
-
-.about_box_info,
-.about_box {
-    box-shadow: 0px 0px 14px -4px var(--background);
-}
-
-.about_box_info {
-    display: flex;
-    flex-direction: column;
-
-    justify-content: center;
+.team_box {
+    margin: 1em;
+    width: 18em;
+    height: 24em;
 
     background: var(--secondary);
-    width: 70%;
 
-    padding: 2em;
-
-    border-radius: 1em;
-    height: 10em;
-}
-
-.about_box {
     display: flex;
     flex-direction: column;
+    align-items: center;
 
-    justify-content: flex-end ;
+    overflow: hidden;
+    border-radius: 20px;
 
-    background: var(--background);
-    width: 70%;
-
-    padding: 2em;
-
-    border-radius: 1em;
-    height: 23em;
 }
 
-.photo {
-    aspect-ratio: 1;
-
-    width: 100%;
-
-    margin-bottom: 1em;
-
-    border-radius: 1em;
-
-    box-shadow: 0px 0px 14px -8px var(--text);
+.team_box > * {
+    transform: translateY(-40px);
 }
 
-.main_txt {
-    background: none;
-
-    font-size: 4em;
-}
-
-.name_txt {
-    background: none;
-
-    font-size: 1.5em;
-}
-
-.second_txt {
-    background: none;
-
-    font-style: italic;
-
-    font-weight: 400;
-
-    font-size: 0.8em;
-
-    color: var(--accent);
+.image {
+    
+    border-radius: 30px;
 }

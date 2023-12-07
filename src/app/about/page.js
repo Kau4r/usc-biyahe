@@ -14,37 +14,34 @@ export default function About() {
     <main className={styles.main}>
       <Nav/>
       <ThemeSwitcher/>
-      <div className={styles.about_cont}>
-
-        <div className={styles.about_col}>
-          <div className={styles.about_box_info}>
-            <h1 className={styles.main_txt}>About Us</h1>
+      <div className={styles.about_page}>
+        <section className={styles.about_1}>
+          <span className={styles.headtxt}>Who are we?</span>
+          <p className={styles.subtxt}>At <span className={styles.high2}>BIYAHE</span>, our misson is to simplify your travel experience in Cebu by offering detailed public transport information such as <span className={styles.high2}>fare details</span> to help you navigate through the bustling streets of <span className={styles.high2}>Cebu</span>. Whether you're exploring historic sites, seeking delicious cusine, or discovering hidden gems, our platform is your go-to resource for seamless commuting adventures in <span className={styles.high2}>Cebu</span>!</p>
+        </section>
+        <section className={styles.about_2}>
+          <span className={styles.headtxt}>Our Team</span>
+          <div className={styles.team_cont}>
+            <div className={styles.team_box}>
+              <Image src={'/adrianbonpin.jpg'} width={300} height={300} className={styles.image}/>
+              <span className={styles.secondtxt}>Adrian Bonpin</span>
+              <span className={styles.normtxt}><span className={styles.high2}>Front-End Dev</span></span>
+              <span className={styles.normtxt}>BSIT - 2</span>
+            </div>
+            <div className={styles.team_box}>
+              <Image src={'/julzcortez.jpg'} width={300} height={300} className={styles.image}/>
+              <span className={styles.secondtxt}>Julz Cortes</span>
+              <span className={styles.normtxt}><span className={styles.high2}>Back-End Dev</span></span>
+              <span className={styles.normtxt}>BSIT - 2</span>
+            </div>
+            <div className={styles.team_box}>
+              <Image src={'/sarahpalabrica.jpg'} width={300} height={300} className={styles.image}/>
+              <span className={styles.secondtxt}>Sarah Palabrica</span>
+              <span className={styles.normtxt}><span className={styles.high2}>UI/UX</span></span>
+              <span className={styles.normtxt}>BSIT - 2</span>
+            </div>
           </div>
-
-          <div className={styles.about_box}>
-            <Image src='/julzcortez.jpg' width={300} height={300} className={styles.photo}/> 
-            <h1 className={styles.name_txt}>Cortez, Julz</h1>
-            <h1 className={styles.second_txt}>Back End</h1>
-          </div>
-
-        </div>
-
-        <div className={styles.about_col}>
-          <div className={styles.about_box}>
-            <Image src='/adrianbonpin.jpg' width={300} height={300} className={styles.photo}/> 
-            <h1 className={styles.name_txt}>Adrian, Bonpin</h1>
-            <h1 className={styles.second_txt}>Front End</h1>
-          </div>
-
-          <div className={styles.about_box}>
-            <Image src='/sarahpalabrica.jpg' width={300} height={300} className={styles.photo}/> 
-            <h1 className={styles.name_txt}>Palabrica, Sarah</h1>
-            <h1 className={styles.second_txt}>Everything Else</h1>
-          </div>
-
-
-        </div>
-
+        </section>
       </div>
     </main>
   )
