@@ -118,19 +118,19 @@ export default function App() {
         </div>
         <div className={styles.distanceDurationContainer}>
           <div className={styles.col_2}>
-            Distance: <h3 className={styles.calc}>{distance}</h3>
+            <span>Distance:</span><h3 className={styles.calc}>{distance}</h3>
           </div>
           <div className={styles.col_2}>
-            Duration: <h3 className={styles.calc}>{duration}</h3>
+            <span>Duration:</span><h3 className={styles.calc}>{duration}</h3>
           </div>
         </div>
         {/* Add Cost */}
         <div className={styles.costCont}>
           <div className={styles.col_2}>
-            Traditional
+            <span>Traditional</span>
           </div>
           <div className={styles.col_2}>
-            Modern
+            <span>Modern</span>
           </div>
         </div>
       </div>
