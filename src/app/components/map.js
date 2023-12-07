@@ -56,7 +56,7 @@ export default function App() {
       if (geocoder.current) {
         geocoder.current.geocode({ location: center}, (res, stat) => {
           if (stat === 'OK') {
-            console.log(res[0].formatted_address)
+            originRef.current.value = res[0].formatted_address
           }
         })
       }
