@@ -63,6 +63,9 @@ export default function App() {
   const originRef = useRef();
   /** @type React.MutableRefObject<HTMLInputElement> */
   const destiantionRef = useRef();
+  
+  // Route Codes Taken
+  const codes_taken = useRef()
 
   if (!isLoaded) {
     return <div>Loading...</div>;
@@ -192,6 +195,17 @@ export default function App() {
             </div>
             <div className={styles.col_3}>
               <span className={styles.tbltxt}>Php {11 + (distance < 4 ? 0 : (distance - 4) * 1.5)}</span>
+            </div>
+          </div>
+          {/* Route Codes */}
+          <div className={styles.tblHead}>
+            <div className={styles.col_1}>
+              <span className={styles.tblHeadtxt}>Route Code/s</span>
+            </div>
+          </div>
+          <div className={styles.tblCont}>
+            <div className={styles.col_1}>
+              <span className={styles.tbltxt} ref={codes_taken}></span>
             </div>
           </div>
         </div>

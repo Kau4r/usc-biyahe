@@ -73,7 +73,7 @@
 
 .tblHeadtxt {
   font-size: .8em;
-  color: #ccc !important;
+  color: var(--text) !important;
 }
 
 .tblCont {
@@ -88,10 +88,15 @@
   font-size: 1em;
 }
 
+.tblCont > .col_1,
 .tblCont > .col_2,
 .tblCont > .col_3 {
   background: #ccc;
   border: 1px solid var(--background);
+}
+
+.col_1 {
+  width: 100%;
 }
 
 .col_2 {
@@ -102,6 +107,7 @@
   width: calc(100% / 3);
 }
 
+.col_1,
 .col_2,
 .col_3 {
   display: flex;
@@ -110,6 +116,7 @@
   padding: .3em;
 }
 
+.col_1 *,
 .col_2 *,
 .col_3 * {
   color: black;

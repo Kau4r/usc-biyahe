@@ -28,7 +28,7 @@
     border: none;
     color: var(--text);
 
-    transition: background-color ease-in 200ms, color ease 400ms;
+    transition: background-color ease-in 200ms, color ease 400ms, border ease 400ms;
 }
 
 body {
