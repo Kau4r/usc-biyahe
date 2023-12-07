@@ -6,6 +6,10 @@ import styles from "@/app/components/map.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
 
+const
+  trad_fare = 13,
+  mod_fare = 15;
+
 export default function App() {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyBF8tm3ds5kJQ7l7VbQcqWQQZkUy1AFgKM",
@@ -23,6 +27,13 @@ export default function App() {
   const [ metrics, setMetrics ] = useState(0)
 
   const geocoder = useRef(null)
+
+  const [ routes, setRoutes ] = useState('')
+
+  const [ standTrad, setStandTrad ] = useState(0)
+  const [ standMod, setStandMod ] = useState(0)
+  const [ discTrad, setDiscTrad ] = useState(0)
+  const [ discMod, setDiscMod ] = useState(0)
 
   useEffect(() => {
     if (isLoaded) {
@@ -63,9 +74,6 @@ export default function App() {
   const originRef = useRef();
   /** @type React.MutableRefObject<HTMLInputElement> */
   const destiantionRef = useRef();
-  
-  // Route Codes Taken
-  const codes_taken = useRef()
 
   if (!isLoaded) {
     return <div>Loading...</div>;
@@ -75,19 +83,50 @@ export default function App() {
     if (originRef.current.value === "" || destiantionRef.current.value === "") {
       return;
     }
-    // eslint-disable-next-line no-undef
+
     const directionsService = new google.maps.DirectionsService();
     const results = await directionsService.route({
       origin: originRef.current.value,
       destination: destiantionRef.current.value,
-      // eslint-disable-next-line no-undef
       travelMode: google.maps.TravelMode.TRANSIT,
     });
-    setDirectionsResponse(results);
+
+    setRoutes(' ')
     setLocation(0)
     setMetrics(1)
-    setDistance(results.routes[0].legs[0].distance.text);
-    setDuration(results.routes[0].legs[0].duration.text);
+
+    setDirectionsResponse(results)
+    setDistance(results.routes[0].legs[0].distance.text)
+    setDuration(results.routes[0].legs[0].duration.text)
+
+    console.log(results)
+
+    let route_codes = ''
+    let standard_trad = 0, standard_modern = 0
+
+    results.routes[0].legs[0].steps.forEach(e => {
+      if (e.travel_mode === 'TRANSIT') {
+        if (route_codes != '') {
+          route_codes = route_codes + '>> '
+        }
+        if (e.transit.line.short_name === undefined) {
+          route_codes = route_codes + 'CERES BUS'
+        } else {
+          route_codes = route_codes + e.transit.line.short_name + ' '
+        }
+        const dist = e.distance.value / 1000
+        standard_trad = standard_trad + trad_fare + (Math.max(dist - 4, 0) * 2)
+        standard_modern = standard_modern + mod_fare + (Math.max(dist - 4, 0) * 2)
+      }
+    })
+
+
+
+    setStandTrad(standard_trad)
+    setDiscTrad(standard_trad * 0.8)
+    setStandMod(standard_modern)
+    setDiscMod(standard_modern * 0.8)
+    setRoutes(route_codes === '' ? 'PLEASE START WALKING' : route_codes)
   }
 
   function clearRoute() {
@@ -133,14 +172,14 @@ export default function App() {
           <button
             onClick={calculateRoute}
             className={styles.button}
-            style={{ background: "#4CAF50", color: "white" }}
+            style={{ background: "var(--confirm)", color: "white" }}
           >
             Calculate
           </button>
           <button
             onClick={clearRoute}
             className={styles.button}
-            style={{ background: "#f44336", color: "white" }}
+            style={{ background: "var(--error)", color: "white" }}
           >
             Clear
           </button>
@@ -180,10 +219,10 @@ export default function App() {
               <span className={styles.tbltxt}>Standard</span>
             </div>
             <div className={styles.col_3}>
-              <span className={styles.tbltxt}>Php {15 + (distance < 4 ? 0 : (distance - 4) * 1.5)}</span>
+              <span className={styles.tbltxt}>Php {standTrad.toFixed(2)}</span>
             </div>
             <div className={styles.col_3}>
-              <span className={styles.tbltxt}>Php {13 + (distance < 4 ? 0 : (distance - 4) * 1.5)}</span>
+              <span className={styles.tbltxt}>Php {standMod.toFixed(2)}</span>
             </div>
           </div>
           <div className={styles.tblCont}>
@@ -191,21 +230,21 @@ export default function App() {
               <span className={styles.tbltxt}>Discount</span>
             </div>
             <div className={styles.col_3}>
-              <span className={styles.tbltxt}>Php {12 + (distance < 4 ? 0 : (distance - 4) * 1.5)}</span>
+              <span className={styles.tbltxt}>Php {discTrad.toFixed(2)}</span>
             </div>
             <div className={styles.col_3}>
-              <span className={styles.tbltxt}>Php {11 + (distance < 4 ? 0 : (distance - 4) * 1.5)}</span>
+              <span className={styles.tbltxt}>Php {discMod.toFixed(2)}</span>
             </div>
           </div>
           {/* Route Codes */}
           <div className={styles.tblHead}>
             <div className={styles.col_1}>
-              <span className={styles.tblHeadtxt}>Route Code/s</span>
+              <span className={styles.tblHeadtxt}>Route</span>
             </div>
           </div>
           <div className={styles.tblCont}>
             <div className={styles.col_1}>
-              <span className={styles.tbltxt} ref={codes_taken}></span>
+              <span className={styles.tbltxt}>{routes}</span>
             </div>
           </div>
         </div>

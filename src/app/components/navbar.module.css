@@ -47,7 +47,8 @@
 }
 
 .current,
-.Link {
+.Link,
+.Login {
   padding: 0.1em 1em 0.1em 1em !important;
 }
 
@@ -70,6 +71,21 @@
 .Link:hover,
 .Link:hover * {
   color: var(--primary);
+}
+
+.Login {
+  margin-left: 1em;
+  font-size: 1em;
+  font-weight: bold;
+  background: var(--accent);
+  color: var(--background);
+  border-radius: 1em;
+  transition: opacity ease 300ms;
+  cursor: pointer;
+}
+
+.Login:hover {
+  opacity: 60%;
 }
 
 /* Non-responsive styles */

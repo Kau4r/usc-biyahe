@@ -5,7 +5,7 @@ import ThemeSwitcher from '@/app/components/themeSwitcher'
 import Image from 'next/image'
 
 export const metadata = {
-  title: 'biyahe - about',
+  title: 'Biyahe Cebu - about',
   description: 'biyahe ta bai!',
 }
 

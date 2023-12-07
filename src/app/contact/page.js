@@ -4,7 +4,7 @@ import ThemeSwitcher from '@/app/components/themeSwitcher'
 import Form from '@/app/contact/form'
 
 export const metadata = {
-  title: 'biyahe - contact',
+  title: 'Biyahe Cebu - contact',
   description: 'biyahe ta bai!',
 }
 

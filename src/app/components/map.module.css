@@ -9,7 +9,7 @@
   position: absolute;
   top: 10px;
   left: 10px;
-  z-index: 3;
+  z-index: 2;
   background-color: var(--background);
   width: 20em;
   border-radius: 20px;
@@ -31,9 +31,9 @@
   width: 100%;
   margin-bottom: 10px;
   border-radius: 10px;
-  border: 1px solid #ccc;
-  background-color: #d4d4d4;
-  color: #0f1b24;
+  border: 1px solid var(--accent);
+  background-color: var(--input_bg);
+  color: var(--input_txt);
   box-sizing: border-box;
 }
 
@@ -91,7 +91,7 @@
 .tblCont > .col_1,
 .tblCont > .col_2,
 .tblCont > .col_3 {
-  background: #ccc;
+  background: var(--input_bg);
   border: 1px solid var(--background);
 }
 
@@ -135,7 +135,7 @@
   position: fixed;
   bottom: 10px;
   left: 10px;
-  z-index: 3;
+  z-index: 2;
   background: none;
   transition: opacity ease 200ms;
 }
@@ -151,13 +151,6 @@
 .location:hover {
   cursor: pointer;
   opacity: 80%;
-}
-
-.calc {
-  font-weight: normal;
-  font-size: 1em;
-  color: red;
-  margin-left: .2em;
 }
 
 .hide {

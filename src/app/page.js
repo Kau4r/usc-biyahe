@@ -4,7 +4,7 @@ import ThemeSwitcher from "@/app/components/themeSwitcher";
 import Map from "@/app/components/map";
 
 export const metadata = {
-  title: 'biyahe',
+  title: 'Biyahe Cebu',
   description: 'biyahe ta bai!',
 }
 

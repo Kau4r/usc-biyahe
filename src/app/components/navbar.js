@@ -1,13 +1,12 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import styles from "@/app/components/navbar.module.css";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
-import { Autocomplete } from "@react-google-maps/api";
+import Link from "next/link"
+import styles from "@/app/components/navbar.module.css"
+import Image from "next/image"
+import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
+
+import Login from '@/app/components/login'
 
 export default function Dash({ setFrom, setTo }) {
   const pathname = usePathname();
@@ -15,6 +14,12 @@ export default function Dash({ setFrom, setTo }) {
   const chkPage = (href) => {
     return pathname === href ? styles.current : styles.Link;
   };
+
+  const [ loginOpen, setLoginOpen ] = useState(false)
+
+  function handleCloseLogin(){
+    setLoginOpen(false)
+  }
 
   return (
     <nav className={styles.navbar}>
@@ -24,6 +29,7 @@ export default function Dash({ setFrom, setTo }) {
           width={100}
           height={100}
           className={styles.logo}
+          alt='Logo'
         />
       </div>
       <div className={styles.links}>
@@ -36,10 +42,9 @@ export default function Dash({ setFrom, setTo }) {
         <div className={chkPage("/contact")}>
           <Link href="/contact">Contact</Link>
         </div>
-        <div className={chkPage("/signin")}>
-          <Link href="/signin">Sign In</Link>
-        </div>
+        <button className={styles.Login} onClick={() => setLoginOpen(true)}> Login </button>
       </div>
+      {loginOpen && <Login onClose={handleCloseLogin}/>}
     </nav>
   );
 }
