@@ -3,13 +3,18 @@
 import {  useJsApiLoader, GoogleMap, Marker, Autocomplete, DirectionsRenderer, } from "@react-google-maps/api";
 import { useRef, useState }  from "react";
 import styles from "@/app/components/map.module.css";
-
-let center = { lat: 10.332615673533242, lng: 123.90974285444454 };
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
 
 export default function App() {
 
+  const [ center, setCenter ] = useState({ lat: 10.332615673533242, lng: 123.90974285444454 })
+
+  const [ zoom, setZoom ] = useState(13)
+
   // For getting location
-  const [ location, setLocation ] = useState(null)
+
+  const [ location, setLocation ] = useState()
 
   const getLoc = async () => {
     try {
@@ -20,7 +25,8 @@ export default function App() {
           reject( new Error('Not Supported'))
         }
       })
-      setLocation({ lat: position.coords.latitude, lng: position.coords.longitude })
+      setCenter({ lat: position.coords.latitude, lng: position.coords.longitude })
+      setZoom(16)
       console.log(latitude)
 
     } catch (error) {
@@ -74,12 +80,15 @@ export default function App() {
 
   return (
     <div className={styles.container}>
+      <button className={styles.location} onClick={getLoc}>
+        <FontAwesomeIcon icon={faLocationCrosshairs} />
+      </button>
       <div className={styles.overlay}>
         <div className={styles.inputContainer}>
           <Autocomplete>
             <input
               type="text"
-              placeholder="Origin"
+              placeholder="Start Point"
               ref={originRef}
               className={styles.textInput}
             />
@@ -87,38 +96,49 @@ export default function App() {
           <Autocomplete>
             <input
               type="text"
-              placeholder="Destination"
+              placeholder="End Point"
               ref={destiantionRef}
               className={styles.textInput}
             />
           </Autocomplete>
-          <div className={styles.buttonContainer}>
-            <button
-              onClick={calculateRoute}
-              className={styles.button}
-              style={{ background: "#4CAF50", color: "white" }}
-            >
-              Calculate Route
-            </button>
-            <button
-              onClick={clearRoute}
-              className={styles.button}
-              style={{ background: "#f44336", color: "white" }}
-            >
-              Clear Route
-            </button>
-          </div>
+          <button
+            onClick={calculateRoute}
+            className={styles.button}
+            style={{ background: "#4CAF50", color: "white" }}
+          >
+            Calculate
+          </button>
+          <button
+            onClick={clearRoute}
+            className={styles.button}
+            style={{ background: "#f44336", color: "white" }}
+          >
+            Clear
+          </button>
         </div>
         <div className={styles.distanceDurationContainer}>
-          <span>Distance: {distance}</span>
-          <span>Duration: {duration}</span>
+          <div className={styles.col_2}>
+            Distance: <h3 className={styles.calc}>{distance}</h3>
+          </div>
+          <div className={styles.col_2}>
+            Duration: <h3 className={styles.calc}>{duration}</h3>
+          </div>
+        </div>
+        {/* Add Cost */}
+        <div className={styles.costCont}>
+          <div className={styles.col_2}>
+            Traditional
+          </div>
+          <div className={styles.col_2}>
+            Modern
+          </div>
         </div>
       </div>
       <div className={styles.mapContainer}>
         {/* Google Map Box */}
         <GoogleMap
           center={center}
-          zoom={13}
+          zoom={zoom}
           mapContainerStyle={{ width: "100%", height: "100%" }}
           options={{
             zoomControl: false,
@@ -128,7 +148,6 @@ export default function App() {
           }}
           onLoad={(map) => setMap(map)}
         >
-          <Marker position={center} />
           {directionsResponse && (
             <DirectionsRenderer directions={directionsResponse} />
           )}
