@@ -1,121 +1,158 @@
-import styles from '@/app/components/login.module.css'
-import { faX } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useState } from 'react'
+import { PrismaClient } from "@prisma/client";
+import { useForm } from "react-hook-form";
+import styles from "@/app/components/login.module.css";
+import { faX } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState, useEffect } from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
 
-export default function login({onClose}) {
+const prisma = new PrismaClient();
 
-    const [ signUp, setSignUp ] = useState(false)
+export default function login({ onClose }) {
+  const { data: session } = useSession();
 
-    function changeSign(){
-        setSignUp(!signUp)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const [signUp, setSignUp] = useState(false);
+
+  function changeSign() {
+    setSignUp(!signUp);
+  }
+
+  const onSubmitSignIn = async (data) => {
+    try {
+      console.log(data);
+      const res = await fetch("/api/sign-in");
+    } catch (error) {
+      console.error("Error Logging In");
     }
+  };
 
-    const [ signInData, setSignInData ] = useState({
-        email: '',
-        pass: '',
-        keep: false,
-    })
+  const onSubmitSignUp = async (data) => {
+    try {
+      console.log(data);
+      const user = await prisma.user.findUnique({
+        where: { username: data.username },
+      });
 
-    const [ signUpData, setSignUpData ] = useState({
-        username: '',
-        email: '',
-        pass: '',
-        pass_conf: '',
-    })
+      if (user) {
+        alert("User with that name already exists!");
+      } else {
+        const res = await fetch("/api/sign-up", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        }).catch((error) => console.error("Fetch error:", error));
 
-    function signInChange(e){
-        const { name, value } = e.target
-        setSignInData((prev) => ({
-            ...prev,
-            [name] :value,
-        }))
-    }
-
-    function keepChange(e){
-        const { checked } = e.target
-        setSignInData((prev) => ({
-            ...prev,
-            keep: checked,
-        }))
-    }
-
-    function signUpChange(e){
-        const { name, value } = e.target
-        setSignUpData((prev) => ({
-            ...prev,
-            [name] :value,
-        }))
-    }
-
-    async function handleSignIn(e){
-        try {
-            const res = await fetch('/api/sign-in', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json',},
-                body: JSON.stringify(signInData),
-            })
-        } catch (error) {
-            console.error('Error Logging In')
+        if (res.ok) {
+          alert("User successfully created!");
+        } else {
+          alert("Error creating user");
         }
+      }
+    } catch (error) {
+      console.error("Error Logging In");
     }
+  };
 
-    async function handleSignUp(e){
-        try {
-            const res = await fetch('/api/sign-up', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json',},
-                body: JSON.stringify(signUpData),
-            })
-        } catch (error) {
-            console.error('Error Logging In')
-        }
-    }
+  const [costs, setCosts] = useState([]);
 
-    return (
-        <div className={styles.login_bg}>
-            <div className={styles.login_box}>
-                <div className={styles.box_close}>
-                    <button onClick={onClose} className={styles.close_button}>
-                        <FontAwesomeIcon icon={faX}/>
-                    </button>
-                </div>
-                <form onSubmit={handleSignIn} className={ signUp === false ? styles.signIn : styles.hide }>
-                    <span className={styles.maintxt}>Welcome Back</span>
-                    <div className={styles.input_cont}> 
-                        <label className={styles.label}>Email Address</label>
-                        <input name='email' type='email' value={signInData.email} onChange={signInChange} className={styles.input} placeholder='Enter Email' required/>
-                    </div>
-                    <div className={styles.input_cont}> 
-                        <label className={styles.label}>Password</label>
-                        <input name='pass' type='password' value={signInData.pass} onChange={signInChange} className={styles.input} placeholder='Enter Password' required/>
-                    </div>
-                    <span className={styles.chkBox}><label className={styles.label}>Stay Signed In? <input name='keep' type='radio' value={signInData.keep} onChange={keepChange} placeholder='Enter Password' required/></label></span>
-                    <button type='submit' className={styles.form_button}>Log In</button>
-                    <span className={styles.sign_txt}>Don't have an account? <a onClick={changeSign} className={styles.sign_txt_act}>Sign Up</a></span>
-                </form>
-                <form onSubmit={handleSignUp} className={ signUp === true ? styles.signUp : styles.hide }>
-                    <span className={styles.maintxt}>Join Us</span>
-                    <div className={styles.input_cont}> 
-                        <label className={styles.label}>Username</label>
-                        <input name='username' type='text' value={signUpData.username} onChange={signUpChange} className={styles.input} placeholder='Enter Username' required/>
-                    </div>
-                    <div className={styles.input_cont}> 
-                        <label className={styles.label}>Email</label>
-                        <input name='email' type='email' value={signUpData.email} onChange={signUpChange} className={styles.input} placeholder='Enter Email' required/>
-                    </div>
-                    <div className={styles.input_cont}> 
-                        <label className={styles.label}>Password</label>
-                        <input name='pass' type='password' value={signUpData.pass} onChange={signUpChange} className={styles.input} placeholder='Enter Password' required/>
-                    </div>
-                    <div className={styles.input_cont}> 
-                        <label className={styles.label}>Confirm Password</label>
-                        <input name='pass_conf' type='password' value={signUpData.pass_conf} onChange={signUpChange} className={styles.input} placeholder='Confirm Password' required/>
-                    </div>
-                    <button type='submit' className={styles.form_button}>Sign Up</button>
-                    <span className={styles.sign_txt}>Already have an account? <a onClick={changeSign} className={styles.sign_txt_act}>Sign In</a></span>
-                </form>
-            </div>
+  return (
+    <div className={styles.login_bg}>
+      <div className={styles.login_box}>
+        <div className={styles.box_close}>
+          <button onClick={onClose} className={styles.close_button}>
+            <FontAwesomeIcon icon={faX} />
+          </button>
         </div>
-    )
+        <form
+          onSubmit={handleSubmit(onSubmitSignIn)}
+          className={signUp === false ? styles.signIn : styles.hide}
+        >
+          <h1 className={styles.title}>Login</h1>
+
+          <input
+            {...register("username", { required: true })}
+            placeholder="Enter Username"
+            className={styles.input}
+          />
+          {errors.email && (
+            <span className={styles.errorMsg}>This field is required</span>
+          )}
+
+          <input
+            {...register("password", { required: true })}
+            type="password" // Set type as password here
+            placeholder="Enter Password"
+            className={styles.input}
+          />
+          {errors.password && (
+            <span className={styles.errorMsg}>This field is required</span>
+          )}
+
+          <input
+            type="submit"
+            onClick={() => signIn()}
+            className={styles.submit}
+          />
+        </form>
+        <form
+          onSubmit={handleSubmit(onSubmitSignUp)}
+          className={signUp === true ? styles.signUp : styles.hide}
+        >
+          <h1 className={styles.title}>Sign Up</h1>
+
+          <input
+            {...register("username", { required: true })}
+            placeholder="Enter Username"
+            className={styles.input}
+          />
+          {errors.username && (
+            <span className={styles.errorMsg}>This field is required</span>
+          )}
+
+          <input
+            {...register("email", { required: true })}
+            placeholder="Enter Email"
+            className={styles.input}
+          />
+          {errors.email && (
+            <span className={styles.errorMsg}>This field is required</span>
+          )}
+
+          <input
+            {...register("password", { required: true })}
+            type="password" // Set type as password here
+            placeholder="Enter Password"
+            className={styles.input}
+          />
+          {errors.password && (
+            <span className={styles.errorMsg}>This field is required</span>
+          )}
+
+          <input
+            {...register("confirmPassword", { required: true })}
+            type="password" // Set type as password here
+            placeholder="Confirm Password"
+            className={styles.input}
+          />
+          {errors.confirmPassword && (
+            <span className={styles.errorMsg}>This field is required</span>
+          )}
+
+          <input type="submit" className={styles.submit} />
+        </form>
+        <span className={styles.sign_txt}>
+          Already have an account?{" "}
+          <a onClick={changeSign} className={styles.sign_txt_act}>
+            Sign In
+          </a>
+        </span>
+      </div>
+    </div>
+  );
 }

@@ -1,10 +1,7 @@
 const eeclient = require('elasticemail-webapiclient').client
 
-const API = '4732F19C5B55FE39188933B6C45C58A4430BF677B9DDC486E49667D88C654A1BEA0D4C87B96E4BBDDC077367ED84B133';
-// I know the API key is there, I can just delete if it gets abused
-
 const EE = new eeclient({
-    apiKey: API,
+    apiKey: process.env.MAIL_KEY,
     apiUri: 'https://api.elasticemail.com/',
     apiVersion: 'v2',
 })

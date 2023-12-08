@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model routenotes {
+  routeID String @unique(map: "routeID") @db.VarChar(5)
+  userID  Int    @unique(map: "userID")
+  content String @db.VarChar(512)
+  noteID  Int    @id
+}
+
+model user {
+  userID   Int    @id @default(autoincrement())
+  username String @db.VarChar(32)
+  email    String @db.VarChar(256)
+  password String @db.VarChar(64)
+}
+
+model puv {
+  puvID      Int    @id @default(autoincrement())
+  type       String @db.VarChar(15)
+  initPrice  Float  @db.Float
+  priceperkm Float  @db.Float
+}

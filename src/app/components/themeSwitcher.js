@@ -1,7 +1,7 @@
 'use client'
 import { useTheme } from "next-themes"
 
-import Styles from '@/app/components/theme.module.css'
+import Styles from './theme.module.css'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons"
